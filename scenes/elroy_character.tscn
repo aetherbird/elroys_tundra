@@ -1,7 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://bpf08acny3xl5"]
+[gd_scene load_steps=58 format=3 uid="uid://bpf08acny3xl5"]
 
 [ext_resource type="Texture2D" uid="uid://psgbs5nk4wmg" path="res://graphics/char/penguin_sprite_sheet.png" id="1_v8gkc"]
 [ext_resource type="Texture2D" uid="uid://bpklchid7lta" path="res://graphics/char/penguin_jump_side.png" id="2_tuwhe"]
+[ext_resource type="AudioStream" uid="uid://dmpsi6dq6nx4a" path="res://audio/effects/Jump.wav" id="3_fa6q5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k0ifk"]
 atlas = ExtResource("1_v8gkc")
@@ -411,15 +412,35 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6gjq"]
-size = Vector2(15.875, 30)
+size = Vector2(24, 45)
 
 [node name="ElroyCharacter" type="CharacterBody2D"]
 
 [node name="ElroySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17)
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_h7f7r")
-animation = &"waddle"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.5)
 shape = SubResource("RectangleShape2D_u6gjq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 11.0
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioStreamJump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_fa6q5")
+
+[node name="AudioStreamDoubleJump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_fa6q5")
+
+[node name="AudioStreamChime" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="AudioStreamAttack" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="AudioStreamHurt" type="AudioStreamPlayer" parent="Audio"]
